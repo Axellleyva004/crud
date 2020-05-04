@@ -83,6 +83,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="/login/facebook">
+                                Facebook Login
+                            </a>
+                        </div>
+                        </li>
+
                         @endif
                         @else
                         <li class="nav-item dropdown">
