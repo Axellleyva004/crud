@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
+Route::get('casillas/pdf','CasillasController@generatepdf');
+Route::get('candidatos/pdf','CandidatosController@generatepdf');
+Route::get('eleccioncomites/pdf','EleccioncomitesController@generatepdf');
+Route::get('elecciones/pdf','EleccionesController@generatepdf');
+Route::get('funcionarios/pdf','FuncionariosController@generatepdf');
+Route::get('roles/pdf','RolesController@generatepdf');
+Route::get('funcionariocasillas/pdf','FuncionariocasillasController@generatepdf');
+Route::get('imeiautorizados/pdf','ImeiautorizadosController@generatepdf');
+Route::get('votos/pdf','VotosController@generatepdf');
+Route::get('votocandidatos/pdf','VotocandidatosController@generatepdf');
 Route::resource('candidatos', 'CandidatosController')->middleware('auth');
 Route::resource('casillas', 'CasillasController')->middleware('auth');
 Route::resource('elecciones', 'EleccionesController')->middleware('auth');
@@ -32,3 +42,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+

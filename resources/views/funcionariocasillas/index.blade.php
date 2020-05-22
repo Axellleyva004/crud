@@ -12,6 +12,7 @@
 @endif
 <br>
 <a href="{{url('funcionariocasillas/create')}}" class="btn btn-success">Agregar Elección</a>
+<a href="{{url('funcionariocasillas/pdf')}}" class="btn btn-success">Descargar pdf</a>
 <br>
 <br>
 <table class="table table-light table-hover">
@@ -52,7 +53,6 @@
         @endforeach
     </tbody>
 </table>
-{{$funcionariocasillas->links()}}
 </div>
 
 @endsection

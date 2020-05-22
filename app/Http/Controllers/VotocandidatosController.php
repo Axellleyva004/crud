@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Votocandidatos;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class VotocandidatosController extends Controller
 {
@@ -12,9 +13,16 @@ class VotocandidatosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $votocandidato = Votocandidatos::all();
+        //print_r($casillas);exit;
+        $pdf = PDF::loadView('votocandidatos/index', ['votocandidatos' => $votocandidato]);
+        return $pdf->download('archivo.pdf');
+    }
     public function index()
     {
-        $datosVotocandidato['votocandidatos']=Votocandidatos::paginate(5);
+        $datosVotocandidato['votocandidatos']=Votocandidatos::all();
         return view('votocandidatos.index',$datosVotocandidato);
     }
 

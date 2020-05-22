@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Funcionarios;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 class FuncionariosController extends Controller
 {
@@ -12,9 +14,16 @@ class FuncionariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $funcionario = Funcionarios::all();
+        //print_r($casillas);exit;
+        $pdf = PDF::loadView('funcionarios/index', ['funcionarios' => $funcionario]);
+        return $pdf->download('archivo.pdf');
+    }
     public function index()
     {
-        $datosFuncionario['funcionarios']=Funcionarios::paginate(5);
+        $datosFuncionario['funcionarios']=Funcionarios::all();
         return view('funcionarios.index',$datosFuncionario);
     }
 

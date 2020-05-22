@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Funcionariocasillas;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class FuncionariocasillasController extends Controller
 {
@@ -12,9 +13,16 @@ class FuncionariocasillasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $funcionariocasillas = Funcionariocasillas::all();
+        //print_r($casillas);exit;
+        $pdf = PDF::loadView('funcionariocasillas/index', ['funcionariocasillas' => $funcionariocasillas]);
+        return $pdf->download('archivo.pdf');
+    }
     public function index()
     {
-        $datosFuncionariocasilla['funcionariocasillas']=Funcionariocasillas::paginate(5);
+        $datosFuncionariocasilla['funcionariocasillas']=Funcionariocasillas::all();
         return view('funcionariocasillas.index',$datosFuncionariocasilla);
     }
 

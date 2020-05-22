@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Casillas;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class CasillasController extends Controller
 {
@@ -12,10 +13,18 @@ class CasillasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function generatepdf()
+    {
+        $casillas = Casillas::all();
+        //print_r($casillas);exit;
+        $pdf = PDF::loadView('casillas/index', ['casillas' => $casillas]);
+        return $pdf->download('archivo.pdf');
+    }
     public function index()
     {
-        $datosCasilla['casillas']=Casillas::paginate(5);
-        return view('casillas.index',$datosCasilla);
+        $datosCasilla['casillas'] = Casillas::paginate(5);
+        return view('casillas.index', $datosCasilla);
     }
 
     /**
@@ -33,7 +42,6 @@ class CasillasController extends Controller
         $candidato->save();
         */
         return view('casillas.create');
-
     }
 
     /**
@@ -52,21 +60,21 @@ class CasillasController extends Controller
         $candidato->save();
         return view('candidatos.create');*/
         //$datosCandidato=request()->all();
-        $campos=[
-            'ubicacion'=>'required|string|max:50',
+        $campos = [
+            'ubicacion' => 'required|string|max:50',
         ];
-        $Mensaje=["required"=>':attribute es requerido'];
-        
+        $Mensaje = ["required" => ':attribute es requerido'];
 
 
-        $this->validate($request,$campos,$Mensaje);
-        $datosCasilla=request()->except('_token');
+
+        $this->validate($request, $campos, $Mensaje);
+        $datosCasilla = request()->except('_token');
         Casillas::insert($datosCasilla);
         //return response()->json($datosCandidato);
-        return redirect('casillas')->with('Mensaje','Casilla agregada con exito');
+        return redirect('casillas')->with('Mensaje', 'Casilla agregada con exito');
     }
 
-    
+
     public function show()
     {
         //
@@ -80,8 +88,8 @@ class CasillasController extends Controller
      */
     public function edit($id)
     {
-        $casilla=Casillas::findOrFail($id);
-        return view('casillas.edit',compact('casilla'));
+        $casilla = Casillas::findOrFail($id);
+        return view('casillas.edit', compact('casilla'));
     }
 
     /**
@@ -94,28 +102,28 @@ class CasillasController extends Controller
     public function update(Request $request, $id)
     {
 
-        $campos=[
-            'ubicacion'=>'required|string|max:50'
+        $campos = [
+            'ubicacion' => 'required|string|max:50'
         ];
-       
-        $Mensaje=["required"=>':attribute es requerido'];
-        $this->validate($request,$campos,$Mensaje);
 
-        $datosCasilla=request()->except(['_token','_method']);
-        Casillas::where('id','=',$id)->update($datosCasilla);
+        $Mensaje = ["required" => ':attribute es requerido'];
+        $this->validate($request, $campos, $Mensaje);
+
+        $datosCasilla = request()->except(['_token', '_method']);
+        Casillas::where('id', '=', $id)->update($datosCasilla);
 
         //$candidato=Candidatos::findOrFail($id);
         //return view('candidatos.edit',compact('candidato'));
-        return redirect('casillas')->with('Mensaje','Casilla modificado con exito');
+        return redirect('casillas')->with('Mensaje', 'Casilla modificado con exito');
     }
 
-    
+
     public function destroy($id)
     {
-        $casilla=Casillas::findOrFail($id);
-        
+        $casilla = Casillas::findOrFail($id);
+
         Casillas::destroy($id);
-        
-        return redirect('casillas')->with('Mensaje','Casilla eliminada con exito');
+
+        return redirect('casillas')->with('Mensaje', 'Casilla eliminada con exito');
     }
 }

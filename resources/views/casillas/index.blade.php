@@ -12,6 +12,7 @@
 @endif
 <br>
 <a href="{{url('casillas/create')}}" class="btn btn-success">Agregar Casilla</a>
+<a href="{{url('casillas/pdf')}}" class="btn btn-success">Descargar PDF</a>
 <br>
 <br>
 <table class="table table-light table-hover">
@@ -43,7 +44,6 @@
         @endforeach
     </tbody>
 </table>
-{{$casillas->links()}}
 </div>
 
 @endsection

@@ -12,6 +12,7 @@
 @endif
 <br>
 <a href="{{url('votocandidatos/create')}}" class="btn btn-success">Agregar votos candidato</a>
+<a href="{{url('votocandidatos/pdf')}}" class="btn btn-success">Descargar pdf</a>
 <br>
 <br>
 <table class="table table-light table-hover">
@@ -46,7 +47,7 @@
         @endforeach
     </tbody>
 </table>
-{{$votocandidatos->links()}}
+
 </div>
 
 @endsection

@@ -12,6 +12,7 @@
 @endif
 <br>
 <a href="{{url('imeiautorizados/create')}}" class="btn btn-success">Agregar Imei autorizado</a>
+<a href="{{url('imeiautorizados/pdf')}}" class="btn btn-success">Descargar pdf</a>
 <br>
 <br>
 <table class="table table-light table-hover">
@@ -53,7 +54,6 @@
         @endforeach
     </tbody>
 </table>
-{{$imeiautorizados->links()}}
 </div>
 
 @endsection

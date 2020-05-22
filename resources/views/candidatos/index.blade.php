@@ -12,6 +12,9 @@
 @endif
 <br>
 <a href="{{url('candidatos/create')}}" class="btn btn-success">Agregar Candidato</a>
+<a href="{{url('candidatos/pdf')}}" class="btn btn-success">Descargar PDF</a>
+
+
 <br>
 <br>
 <table class="table table-light table-hover">
@@ -30,7 +33,7 @@
         <tr>
             <td>{{$candidato->id_candidato}}</td>
             <td>
-                <img src="{{asset('storage').'/'.$candidato->foto}}" class="img-thumbnail img-fluid" alt="" width="150">
+            {{$candidato->foto}}
             
             </td>
             <td>{{$candidato->nombrecompleto}}</td>
@@ -52,7 +55,6 @@
         @endforeach
     </tbody>
 </table>
-{{$candidatos->links()}}
 </div>
 
 @endsection

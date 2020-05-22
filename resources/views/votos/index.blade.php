@@ -12,6 +12,7 @@
 @endif
 <br>
 <a href="{{url('votos/create')}}" class="btn btn-success">Agregar Voto</a>
+<a href="{{url('votos/pdf')}}" class="btn btn-success">Descargar pdf</a>
 <br>
 <br>
 <table class="table table-light table-hover">
@@ -31,8 +32,7 @@
             <td>{{$voto->id_casilla}}</td>
            
             <td>
-                <img src="{{asset('storage').'/'.$voto->evidencia}}" class="img-thumbnail img-fluid" alt="" width="150">
-            
+            {{$voto->evidencia}}
             </td>
             
             <td>
@@ -50,7 +50,6 @@
         @endforeach
     </tbody>
 </table>
-{{$votos->links()}}
 </div>
 
 @endsection

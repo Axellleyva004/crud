@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Roles;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 class RolesController extends Controller
 {
@@ -12,9 +14,16 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $rol = Roles::all();
+        //print_r($casillas);exit;
+        $pdf = PDF::loadView('roles/index', ['roles' => $rol]);
+        return $pdf->download('archivo.pdf');
+    }
     public function index()
     {
-        $datosRol['roles']=Roles::paginate(5);
+        $datosRol['roles']=Roles::all();
         return view('roles.index',$datosRol);
     }
 

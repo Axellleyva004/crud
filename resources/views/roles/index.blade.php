@@ -12,6 +12,7 @@
 @endif
 <br>
 <a href="{{url('roles/create')}}" class="btn btn-success">Agregar Rol</a>
+<a href="{{url('roles/pdf')}}" class="btn btn-success">Descargar pdf</a>
 <br>
 <br>
 <table class="table table-light table-hover">
@@ -43,7 +44,6 @@
         @endforeach
     </tbody>
 </table>
-{{$roles->links()}}
 </div>
 
 @endsection

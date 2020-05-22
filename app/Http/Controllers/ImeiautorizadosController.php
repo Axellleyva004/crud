@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imeiautorizados;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 
 class ImeiautorizadosController extends Controller
@@ -13,9 +14,16 @@ class ImeiautorizadosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $imeiautorizado = Imeiautorizados::all();
+        //print_r($casillas);exit;
+        $pdf = PDF::loadView('imeiautorizados/index', ['imeiautorizados' => $imeiautorizado]);
+        return $pdf->download('archivo.pdf');
+    }
     public function index()
     {
-        $datosImeiautorizado['imeiautorizados']=Imeiautorizados::paginate(5);
+        $datosImeiautorizado['imeiautorizados']=Imeiautorizados::all();
         return view('imeiautorizados.index',$datosImeiautorizado);
     }
 

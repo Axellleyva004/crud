@@ -12,6 +12,7 @@
 @endif
 <br>
 <a href="{{url('eleccioncomites/create')}}" class="btn btn-success">Agregar Elección comite</a>
+<a href="{{url('eleccioncomites/pdf')}}" class="btn btn-success">Agregar Elección comite</a>
 <br>
 <br>
 <table class="table table-light table-hover">
@@ -48,7 +49,6 @@
         @endforeach
     </tbody>
 </table>
-{{$eleccioncomites->links()}}
 </div>
 
 @endsection

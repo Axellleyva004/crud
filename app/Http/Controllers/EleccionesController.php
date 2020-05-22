@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Elecciones;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class EleccionesController extends Controller
 {
@@ -12,9 +13,16 @@ class EleccionesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $elecciones = Elecciones::all();
+        //print_r($casillas);exit;
+        $pdf = PDF::loadView('elecciones/index', ['elecciones' => $elecciones]);
+        return $pdf->download('archivo.pdf');
+    }
     public function index()
     {
-        $datosEleccion['elecciones']=Elecciones::paginate(5);
+        $datosEleccion['elecciones']=Elecciones::all();
         return view('elecciones.index',$datosEleccion);
     }
 

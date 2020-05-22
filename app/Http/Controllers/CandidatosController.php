@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Candidatos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade as PDF;
 class CandidatosController extends Controller
 {
     /**
@@ -12,6 +13,13 @@ class CandidatosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function generatepdf()
+    {
+        $candidatos = Candidatos::all();
+        //print_r($casillas);exit;
+        $pdf2 = PDF::loadView('candidatos/index', ['candidatos' => $candidatos]);
+        return $pdf2->download('archivo.pdf');
+    }
     public function index()
     {
         $datosCandidato['candidatos']=Candidatos::paginate(5);

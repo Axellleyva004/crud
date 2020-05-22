@@ -7,6 +7,7 @@ use App\Funcionarios;
 use App\Eleccioncomites;
 use App\Elecciones;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class EleccioncomitesController extends Controller
 {
@@ -15,6 +16,14 @@ class EleccioncomitesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function generatepdf()
+    {
+        $eleccioncomite = Eleccioncomites::all();
+        //print_r($casillas);exit;
+        $pdf = PDF::loadView('eleccioncomites/index', ['eleccioncomites' => $eleccioncomite]);
+        return $pdf->download('archivo.pdf');
+    }
     public function index()
     {
         $datosEleccioncomite['eleccioncomites']=Eleccioncomites::paginate(5);
